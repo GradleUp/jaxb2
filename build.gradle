@@ -1,0 +1,47 @@
+plugins {
+  id 'wrapper'
+  id "com.gradle.plugin-publish" version "0.10.1"
+  id "com.cinnober.gradle.semver-git" version "2.4.0"
+}
+
+wrapper {
+  gradleVersion = '4.10.3'
+}
+
+pluginBundle {
+  website = 'https://github.com/gradle-community/jaxb2'
+  vcsUrl = 'https://github.com/gradle-community/jaxb2'
+  description = 'Plugin for generating Java sources from XML schemas files.'
+  tags = ['jaxb2', 'jaxb']
+
+  plugins {
+    jaxb2Plugin {
+      id = 'com.github.gradlecommunity.jaxb2'
+      displayName = 'Gradle JAXB2 plugin'
+    }
+  }
+}
+
+apply plugin: 'java'
+apply plugin: 'groovy'
+apply plugin: 'org.gradle.maven'
+
+repositories {
+  mavenCentral()
+  jcenter()
+}
+
+dependencies {
+  compile gradleApi()
+  compile localGroovy()
+
+  testCompile "org.testng:testng:$testNgVersion"
+  testCompile "org.hamcrest:hamcrest-core:$hamcrestVersion"
+  testCompile "junit:junit:$junitVersion"
+}
+
+test {
+  useTestNG()
+  minHeapSize = '128m'
+  maxHeapSize = '512m'
+}
