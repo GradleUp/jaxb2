@@ -24,8 +24,8 @@ class Jaxb2Plugin implements Plugin<Project> {
   private static final Logger LOG = LoggerFactory.getLogger(Jaxb2Plugin.class)
 
   private static final String SLF4J_VERSION = '1.7.13'
-  private static final String JAXB2_VERSION = '0.9.5'
-  private static final String JAXB_VERSION = '2.2.11'
+  private static final String JAXB2_VERSION = '1.11.1'
+  private static final String JAXB_VERSION = '2.3.0.1'
   private static final String COMMONS_LOGGING_VERSION = '1.2'
 
   @Override
