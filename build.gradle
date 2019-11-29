@@ -67,4 +67,4 @@ task functionalTest(type: Test) {
   classpath = sourceSets.functionalTest.runtimeClasspath
 }
 
-//check.dependsOn functionalTest
+check.dependsOn functionalTest
