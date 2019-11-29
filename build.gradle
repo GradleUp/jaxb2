@@ -1,13 +1,8 @@
 plugins {
-  id 'wrapper'
   id "java-gradle-plugin"
   id "maven-publish"
   id "com.gradle.plugin-publish" version "0.10.1"
   id "com.cinnober.gradle.semver-git" version "2.4.0"
-}
-
-wrapper {
-  gradleVersion = '4.10.3'
 }
 
 gradlePlugin {
@@ -27,10 +22,6 @@ pluginBundle {
   description = 'Plugin for generating Java sources from XML schemas files.'
   tags = ['jaxb2', 'jaxb']
 }
-
-apply plugin: 'java'
-apply plugin: 'groovy'
-apply plugin: 'org.gradle.maven'
 
 repositories {
   mavenCentral()
