@@ -1,5 +1,7 @@
 plugins {
   id 'wrapper'
+  id "java-gradle-plugin"
+  id "maven-publish"
   id "com.gradle.plugin-publish" version "0.10.1"
   id "com.cinnober.gradle.semver-git" version "2.4.0"
 }
@@ -8,18 +10,22 @@ wrapper {
   gradleVersion = '4.10.3'
 }
 
+gradlePlugin {
+  plugins {
+    jaxb2Plugin {
+      id = 'com.github.gradlecommunity.jaxb2'
+      implementationClass = "com.ewerk.gradle.plugins.Jaxb2Plugin"
+      displayName = 'Gradle JAXB2 plugin'
+      description = 'Plugin for generating Java sources from XML schemas files.'
+    }
+  }
+}
+
 pluginBundle {
   website = 'https://github.com/gradle-community/jaxb2'
   vcsUrl = 'https://github.com/gradle-community/jaxb2'
   description = 'Plugin for generating Java sources from XML schemas files.'
   tags = ['jaxb2', 'jaxb']
-
-  plugins {
-    jaxb2Plugin {
-      id = 'com.github.gradlecommunity.jaxb2'
-      displayName = 'Gradle JAXB2 plugin'
-    }
-  }
 }
 
 apply plugin: 'java'
@@ -32,7 +38,6 @@ repositories {
 }
 
 dependencies {
-  compile gradleApi()
   compile localGroovy()
 
   testCompile "org.testng:testng:$testNgVersion"
