@@ -1,0 +1,17 @@
+plugins {
+    id "com.github.gradlecommunity.jaxb2"
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+jaxb2 {
+    xjc {
+        request {
+            basePackage = "com.test"
+            schema = "test.xsd"
+        }
+    }
+}

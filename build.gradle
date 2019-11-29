@@ -6,6 +6,19 @@ plugins {
   id "com.cinnober.gradle.semver-git" version "2.4.0"
 }
 
+sourceSets {
+  functionalTest {
+    java {
+      srcDir file('src/functionalTest/java')
+    }
+    resources {
+      srcDir file('src/functionalTest/resources')
+    }
+    compileClasspath += sourceSets.main.output + configurations.testRuntimeClasspath
+    runtimeClasspath += output + compileClasspath
+  }
+}
+
 gradlePlugin {
   plugins {
     jaxb2Plugin {
@@ -15,6 +28,7 @@ gradlePlugin {
       description = 'Plugin for generating Java sources from XML schemas files.'
     }
   }
+  testSourceSets sourceSets.functionalTest
 }
 
 pluginBundle {
@@ -24,21 +38,33 @@ pluginBundle {
   tags = ['jaxb2', 'jaxb']
 }
 
+group = "com.github.gradlecommunity.jaxb2"
+
+sourceCompatibility=1.8
+targetCompatibility=1.8
+
+ext.hamcrestVersion=1.3
+ext.junitVersion=4.12
+
 repositories {
   mavenCentral()
   jcenter()
 }
 
 dependencies {
-  compile localGroovy()
+  implementation localGroovy()
 
-  testCompile "org.testng:testng:$testNgVersion"
-  testCompile "org.hamcrest:hamcrest-core:$hamcrestVersion"
-  testCompile "junit:junit:$junitVersion"
+  testImplementation "org.hamcrest:hamcrest-core:$hamcrestVersion"
+  testImplementation "junit:junit:$junitVersion"
+  testImplementation gradleTestKit()
 }
 
 test {
-  useTestNG()
-  minHeapSize = '128m'
-  maxHeapSize = '512m'
 }
+
+task functionalTest(type: Test) {
+  testClassesDirs = sourceSets.functionalTest.output.classesDirs
+  classpath = sourceSets.functionalTest.runtimeClasspath
+}
+
+//check.dependsOn functionalTest
