@@ -67,7 +67,7 @@ __Use via Gradle plugin portal__
 
 ```groovy
 plugins {
-  id "com.ewerk.gradle.plugins.jaxb2" version "1.0.2"
+  id 'com.github.gradlecommunity.jaxb2' version '0.1.0'
 }
 ```
 
@@ -75,7 +75,7 @@ __Full configuration example__
 
 ```groovy
 plugins {
-  id 'com.ewerk.gradle.plugins.jaxb2' version '1.0.2'
+  id 'com.github.gradlecommunity.jaxb2' version '0.1.0'
 }
 
 repositories {
