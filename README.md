@@ -2,7 +2,8 @@
 ### JAXB2 plugin
 This is a fork of [ewerk/gradle-plugins/jaxb2](https://github.com/ewerk/gradle-plugins/).
 
-The thing we needed to be fixed has been fixed upstreams, so please migrate back to [ewerk/gradle-plugins/jaxb2](https://github.com/ewerk/gradle-plugins/).
+~~The thing we needed to be fixed has been fixed upstreams, so please migrate back to [ewerk/gradle-plugins/jaxb2](https://github.com/ewerk/gradle-plugins/).~~
+There are additional things to work on.
 
 
 #### Description
