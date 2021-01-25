@@ -57,6 +57,7 @@ class GenerateJaxb2Classes extends DefaultTask {
         schema: schemaFile,
         encoding: encoding,
         extension: extension,
+        header: theConfig.header,
       ]
 
       if (catalogFile) {
