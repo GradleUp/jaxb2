@@ -1,4 +1,4 @@
-package com.ewerk.gradle.plugins
+package com.gradleup.jaxb
 
 /**
  * DSL extension for the Jaxb2 plugin. Provides some convenient configuration options.

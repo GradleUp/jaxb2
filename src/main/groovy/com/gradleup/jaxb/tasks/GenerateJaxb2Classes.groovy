@@ -1,6 +1,7 @@
-package com.ewerk.gradle.plugins.tasks
+package com.gradleup.jaxb.tasks
 
-import com.ewerk.gradle.plugins.Jaxb2Plugin
+
+import com.gradleup.jaxb.Jaxb2Plugin
 import org.gradle.api.DefaultTask
 import org.gradle.api.logging.Logger
 import org.gradle.api.tasks.TaskAction

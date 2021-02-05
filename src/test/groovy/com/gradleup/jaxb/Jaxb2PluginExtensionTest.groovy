@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.ewerk.gradle.plugins
+package com.gradleup.jaxb
 
 import org.testng.annotations.BeforeMethod
 import org.testng.annotations.Test

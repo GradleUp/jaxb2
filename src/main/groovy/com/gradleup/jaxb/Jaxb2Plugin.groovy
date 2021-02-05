@@ -1,9 +1,9 @@
-package com.ewerk.gradle.plugins
+package com.gradleup.jaxb
 
-import com.ewerk.gradle.plugins.tasks.CleanJaxb2SourcesDir
-import com.ewerk.gradle.plugins.tasks.GenerateJaxb2Classes
-import com.ewerk.gradle.plugins.tasks.InitJaxb2SourcesDir
-import com.ewerk.gradle.plugins.tasks.XjcTaskConfig
+import com.gradleup.jaxb.tasks.CleanJaxb2SourcesDir
+import com.gradleup.jaxb.tasks.GenerateJaxb2Classes
+import com.gradleup.jaxb.tasks.InitJaxb2SourcesDir
+import com.gradleup.jaxb.tasks.XjcTaskConfig
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.artifacts.Configuration

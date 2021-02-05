@@ -1,6 +1,6 @@
 [![License](http://img.shields.io/badge/license-Apache%202.0-brightgreen.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0) [![Build Status](http://img.shields.io/travis/ewerk/gradle-plugins.svg?style=flat)](https://travis-ci.org/ewerk/gradle-plugins)
 ### JAXB2 plugin
-This is a fork of [ewerk/gradle-plugins/jaxb2](https://github.com/ewerk/gradle-plugins/).
+This is a fork from [ewerk/gradle-plugins/jaxb2](https://github.com/ewerk/gradle-plugins/).
 
 ~~The thing we needed to be fixed has been fixed upstreams, so please migrate back to [ewerk/gradle-plugins/jaxb2](https://github.com/ewerk/gradle-plugins/).~~
 There are additional things to work on.
@@ -126,7 +126,7 @@ jaxb2 {
 __Minimal configuration example__
 ```groovy
 plugins {
-  id 'com.ewerk.gradle.plugins.jaxb2' version '1.0.2'
+  id 'com.github.gradlecommunity.jaxb2' version '1.0.2'
 }
 
 repositories {

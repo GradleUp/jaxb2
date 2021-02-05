@@ -1,4 +1,4 @@
-package com.ewerk.gradle.plugins.tasks
+package com.gradleup.jaxb.tasks
 
 /**
  * Simple extension bean. Is used within the plugins extension a wrapper for the 'xjc' container.
