@@ -6,8 +6,8 @@ import com.gradleup.jaxb.tasks.InitJaxb2SourcesDir
 import org.gradle.api.Project
 import org.gradle.api.plugins.JavaPlugin
 import org.gradle.testfixtures.ProjectBuilder
-import org.testng.annotations.BeforeMethod
-import org.testng.annotations.Test
+import org.junit.Before
+import org.junit.Test
 
 import static org.hamcrest.CoreMatchers.*
 import static org.hamcrest.MatcherAssert.assertThat
@@ -19,7 +19,7 @@ import static org.hamcrest.MatcherAssert.assertThat
 class Jaxb2PluginTest {
   private Project project
 
-  @BeforeMethod
+  @Before
   void setup() {
     project = ProjectBuilder.builder().build()
     project.plugins.apply(Jaxb2Plugin.class)

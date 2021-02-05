@@ -1,0 +1,18 @@
+plugins {
+    id "com.github.gradlecommunity.jaxb2"
+}
+
+repositories {
+    mavenCentral()
+}
+
+jaxb2 {
+    xjc {
+        'example' {
+            generatedSourcesDir  = 'src/generated/java'
+            basePackage = 'com.gradleup.generated.model'
+            schema = 'example.xsd'
+            header = false
+        }
+    }
+}

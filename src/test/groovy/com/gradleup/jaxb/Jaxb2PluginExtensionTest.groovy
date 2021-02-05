@@ -16,8 +16,8 @@
 
 package com.gradleup.jaxb
 
-import org.testng.annotations.BeforeMethod
-import org.testng.annotations.Test
+import org.junit.Before
+import org.junit.Test
 
 import static org.hamcrest.CoreMatchers.notNullValue
 import static org.hamcrest.MatcherAssert.assertThat
@@ -30,7 +30,7 @@ class Jaxb2PluginExtensionTest {
 
   private Jaxb2PluginExtension extension
 
-  @BeforeMethod
+  @Before
   void setup() {
     extension = new Jaxb2PluginExtension()
   }

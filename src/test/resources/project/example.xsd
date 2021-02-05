@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:element name="car" type="car"/>
+    <xs:element name="cat" type="cat"/>
+    <xs:complexType name="car">
+        <xs:sequence>
+            <xs:element name="color" type="xs:string" minOccurs="0"/>
+            <xs:element name="brand" type="xs:string" minOccurs="0"/>
+            <xs:element ref="cat" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="cat">
+        <xs:sequence>
+            <xs:element name="ears" type="xs:int"/>
+            <xs:element name="birthday" type="xs:dateTime" minOccurs="0"/>
+            <xs:element name="name" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
