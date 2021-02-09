@@ -28,7 +28,7 @@ closure of your project. This is shown in the examples below.
 
 ##### taskName
 The full qualified name of the JAXB2 ant task the does the real work. 
-Defaults to `com.sun.tools.xjc.XJCTask`. 
+Defaults to `org.jvnet.jaxb2_commons.xjc.XJC2Task`. 
 Normally there will be need to change this.
 
 ##### xjc
@@ -88,8 +88,15 @@ repositories {
 
 // the whole dependency container could be left out
 dependencies {
+  // default JAXB2 libs added by the plugin
+  jaxb2 'org.jvnet.jaxb2_commons:jaxb2-basics-runtime:0.9.5'
+  jaxb2 'org.jvnet.jaxb2_commons:jaxb2-basics-ant:0.9.5'
+  jaxb2 'org.jvnet.jaxb2_commons:jaxb2-basics:0.9.5'
+
   // default JAXB libs added by the plugin
-  jaxb2 'com.sun.xml.bind:jaxb-xjc:3.0.0'
+  jaxb2 'com.sun.xml.bind:jaxb-core:2.2.11'
+  jaxb2 'com.sun.xml.bind:jaxb-xjc:2.2.11'
+  jaxb2 'com.sun.xml.bind:jaxb-impl:2.2.11'
   
   // any custom libraries here
   jaxb2 'com. …'

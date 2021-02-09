@@ -9,7 +9,7 @@ package com.gradleup.jaxb
 class Jaxb2PluginExtension {
   static final String NAME = 'jaxb2'
 
-  String taskName = 'com.sun.tools.xjc.XJCTask'
+  String taskName = 'org.jvnet.jaxb2_commons.xjc.XJC2Task'
 }
 
 

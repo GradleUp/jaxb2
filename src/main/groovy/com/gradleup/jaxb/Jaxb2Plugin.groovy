@@ -23,7 +23,10 @@ class Jaxb2Plugin implements Plugin<Project> {
 
   private static final Logger LOG = LoggerFactory.getLogger(Jaxb2Plugin.class)
 
-  private static final String JAXB_VERSION = '3.0.0'
+  private static final String SLF4J_VERSION = '1.7.13'
+  private static final String JAXB2_VERSION = '0.9.5'
+  private static final String JAXB_VERSION = '2.2.11'
+  private static final String COMMONS_LOGGING_VERSION = '1.2'
 
   @Override
   void apply(final Project project) {
@@ -78,7 +81,17 @@ class Jaxb2Plugin implements Plugin<Project> {
 
   private addJaxbDependencies(Project project) {
     project.dependencies {
-      jaxb2 "com.sun.xml.bind:jaxb-xjc:$JAXB_VERSION"
+      jaxb2 'org.slf4j:slf4j-simple:' + SLF4J_VERSION
+
+      jaxb2 'org.jvnet.jaxb2_commons:jaxb2-basics-runtime:' + JAXB2_VERSION
+      jaxb2 'org.jvnet.jaxb2_commons:jaxb2-basics-ant:' + JAXB2_VERSION
+      jaxb2 'org.jvnet.jaxb2_commons:jaxb2-basics:' + JAXB2_VERSION
+      jaxb2 'org.jvnet.jaxb2_commons:jaxb2-basics-tools:' + JAXB2_VERSION
+      jaxb2 'commons-logging:commons-logging:' + COMMONS_LOGGING_VERSION
+
+      jaxb2 'com.sun.xml.bind:jaxb-core:' + JAXB_VERSION
+      jaxb2 'com.sun.xml.bind:jaxb-xjc:' + JAXB_VERSION
+      jaxb2 'com.sun.xml.bind:jaxb-impl:' + JAXB_VERSION
     }
   }
 
