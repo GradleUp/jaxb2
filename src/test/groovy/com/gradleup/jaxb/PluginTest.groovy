@@ -28,6 +28,17 @@ class PluginTest extends Specification {
         result1.task(":generateJaxb2Classes").outcome == TaskOutcome.SUCCESS
     }
 
+    def 'compile project'() {
+        given:
+        copyResources("project")
+
+        when:
+        def result1 = build("assemble")
+
+        then:
+        result1.task(":generateJaxb2Classes").outcome == TaskOutcome.SUCCESS
+    }
+
     protected final GradleRunner newRunner(final String... args) {
         List<String> additionalArgs = ["--warning-mode=fail"]
         return GradleRunner.create()
