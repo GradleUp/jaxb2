@@ -1,5 +1,5 @@
 plugins {
-    id "com.github.gradlecommunity.jaxb2"
+    id "com.gradleup.jaxb2"
 }
 
 repositories {

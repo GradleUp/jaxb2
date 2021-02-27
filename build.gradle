@@ -17,7 +17,7 @@ pluginBundle {
 
   plugins {
     jaxb2Plugin {
-      id = 'com.github.gradlecommunity.jaxb2'
+      id = 'com.gradleup.jaxb2'
       displayName = 'Gradle JAXB2 plugin'
     }
   }
@@ -31,6 +31,75 @@ repositories {
   mavenCentral()
   jcenter()
 }
+
+// START: For OSSRH
+apply plugin: 'signing'
+
+def javadocJar = tasks.register("javadocJar", Jar) {
+  it.classifier = 'javadoc'
+  it.from javadoc
+}
+
+def sourcesJar = tasks.register("sourcesJar", Jar) {
+  it.classifier = 'sources'
+  it.from sourceSets.main.allSource
+}
+
+artifacts {
+  archives javadocJar, sourcesJar
+}
+
+signing {
+  required { System.getenv("CI") }
+  useGpgCmd()
+  sign configurations.archives
+}
+
+uploadArchives {
+  repositories {
+    mavenDeployer {
+      beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+      repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2") {
+        authentication(userName: ossrhUsername, password: ossrhPassword)
+      }
+
+      snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots") {
+        authentication(userName: ossrhUsername, password: ossrhPassword)
+      }
+
+      pom.project {
+        name 'Gradle jaxb2 plugin'
+        packaging 'jar'
+        description 'Gradle plugin for jaxb2'
+        url 'https://github.com/GradleUp/jaxb2'
+        group 'com.gradleup'
+
+        scm {
+          connection 'scm:git:https://github.com/GradleUp/jaxb2.git'
+          developerConnection 'scm:git:https://github.com/GradleUp/jaxb2.git'
+          url 'https://github.com/GradleUp/jaxb2/'
+        }
+
+        licenses {
+          license {
+            name 'The Apache License, Version 2.0'
+            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+          }
+        }
+
+        developers {
+          developer {
+            id 'deepy'
+            name 'Alex Nordlund'
+            email 'deep.alexander@gmail.com'
+          }
+        }
+      }
+    }
+  }
+}
+// END: For OSSRH
 
 dependencies {
   compile gradleApi()
