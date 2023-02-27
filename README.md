@@ -1,4 +1,7 @@
 [![License](http://img.shields.io/badge/license-Apache%202.0-brightgreen.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0) [![Build Status](http://img.shields.io/travis/ewerk/gradle-plugins.svg?style=flat)](https://travis-ci.org/ewerk/gradle-plugins)
+
+[![Gradle Plugin Portal](https://img.shields.io/gradle-plugin-portal/v/com.github.gradlecommunity.jaxb2)](https://plugins.gradle.org/plugin/com.github.gradlecommunity.jaxb2)
+
 ### JAXB2 plugin
 This is a fork from [ewerk/gradle-plugins/jaxb2](https://github.com/ewerk/gradle-plugins/).
 
@@ -69,9 +72,12 @@ xjc {
 
 __Use via Gradle plugin portal__
 
+Plugin page, Groovy & Kotlin DSL:
+https://plugins.gradle.org/plugin/com.github.gradlecommunity.jaxb2
+
 ```groovy
 plugins {
-  id 'com.github.gradlecommunity.jaxb2' version '0.1.0'
+  id 'com.github.gradlecommunity.jaxb2' version '3.1.0'
 }
 ```
 
@@ -79,7 +85,7 @@ __Full configuration example__
 
 ```groovy
 plugins {
-  id 'com.github.gradlecommunity.jaxb2' version '0.1.0'
+  id 'com.github.gradlecommunity.jaxb2' version '3.1.0'
 }
 
 repositories {
@@ -126,7 +132,7 @@ jaxb2 {
 __Minimal configuration example__
 ```groovy
 plugins {
-  id 'com.github.gradlecommunity.jaxb2' version '1.0.2'
+  id 'com.github.gradlecommunity.jaxb2' version '3.1.0'
 }
 
 repositories {
