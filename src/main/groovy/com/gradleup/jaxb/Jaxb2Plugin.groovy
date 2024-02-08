@@ -8,6 +8,7 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.artifacts.Configuration
 import org.gradle.api.plugins.JavaPlugin
+import org.gradle.api.tasks.Copy
 import org.gradle.internal.reflect.Instantiator
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -27,6 +28,7 @@ class Jaxb2Plugin implements Plugin<Project> {
   private static final String JAXB2_VERSION = '0.9.5'
   private static final String JAXB_VERSION = '2.2.11'
   private static final String COMMONS_LOGGING_VERSION = '1.2'
+  private static final String JAXB_OUTPUT_DIR_BASE = "gradleup/jaxb2"
 
   @Override
   void apply(final Project project) {
@@ -71,12 +73,53 @@ class Jaxb2Plugin implements Plugin<Project> {
     // add new tasks for creating/cleaning the auto-value sources dir
     project.task(type: CleanJaxb2SourcesDir, "cleanJaxb2SourcesDir")
     project.task(type: InitJaxb2SourcesDir, "initJaxb2SourcesDir")
-    project.task(type: GenerateJaxb2Classes, "generateJaxb2Classes")
 
-    // make 'compileJava' require the new task, so that all sources are available
     project.tasks.clean.dependsOn project.tasks.cleanJaxb2SourcesDir
-    project.tasks.generateJaxb2Classes.dependsOn project.tasks.initJaxb2SourcesDir
-    project.tasks.compileJava.dependsOn project.tasks.generateJaxb2Classes
+
+    project.extensions.jaxb2.xjc.all { registerGenerateJaxb2ClassesTask(project, it) }
+  }
+
+  private static void registerGenerateJaxb2ClassesTask(Project project, XjcTaskConfig xjcConfig) {
+    def generationTaskConfig = xjcConfig
+    def generationTask = project.tasks.register("generateJaxb2Classes${generationTaskConfig.name.capitalize()}", GenerateJaxb2Classes) {
+
+      it.generatedSourcesDirectory.set(project.layout.buildDirectory.dir("$JAXB_OUTPUT_DIR_BASE/${generationTaskConfig.name}"))
+      it.schemaFile.set(project.layout.projectDirectory.file(generationTaskConfig.schema))
+      it.basePackage.set(generationTaskConfig.basePackage)
+      it.encoding.set(generationTaskConfig.encoding)
+      it.extension.set(generationTaskConfig.extension)
+      it.additionalArgs.set(generationTaskConfig.additionalArgs)
+      it.header.set(generationTaskConfig.header)
+
+      if (generationTaskConfig.catalog != null) {
+        it.catalogFile.set(project.layout.projectDirectory.file(generationTaskConfig.catalog))
+      }
+
+      it.bindingsFiles.from(collectBindingsFiles(project, generationTaskConfig.bindingsDir, generationTaskConfig.includedBindingFiles))
+
+      dependsOn project.tasks.initJaxb2SourcesDir
+    }
+
+    def copyGeneratedClassesTask = project.tasks.register("copyJaxb2Classes${generationTaskConfig.name.capitalize()}", Copy) {
+      def xjcProvider = project.provider { generationTaskConfig }
+      def packagePathProvider = xjcProvider.map { it.basePackage.replace(".", "/") }
+      from packagePathProvider.map { packagePath -> project.layout.buildDirectory.dir("$JAXB_OUTPUT_DIR_BASE/${generationTaskConfig.name}/$packagePath") }
+      into packagePathProvider.map { packagePath -> project.layout.projectDirectory.dir("${generationTaskConfig.generatedSourcesDir}/$packagePath") }
+      dependsOn generationTask
+    }
+
+    project.tasks.compileJava.dependsOn copyGeneratedClassesTask
+  }
+
+  private static Set<File> collectBindingsFiles(Project project, String bindingsDir, String includedBindingFiles) {
+    def bindingsFileTreeBaseDir = bindingsDir != null ? project.layout.projectDirectory.dir(bindingsDir) : project.layout.projectDirectory
+    def bindingsFilesTree = project.fileTree(bindingsFileTreeBaseDir)
+    if (includedBindingFiles != null) {
+      includedBindingFiles.trim().split(", ").each {  bindingsFilesTree.include(it) }
+    } else {
+      bindingsFilesTree.include("**/*.xjb")
+    }
+    bindingsFilesTree.files
   }
 
   private addJaxbDependencies(Project project) {
