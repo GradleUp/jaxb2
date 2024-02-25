@@ -3,11 +3,7 @@
 [![Gradle Plugin Portal](https://img.shields.io/gradle-plugin-portal/v/com.github.gradlecommunity.jaxb2)](https://plugins.gradle.org/plugin/com.github.gradlecommunity.jaxb2)
 
 ### JAXB2 plugin
-This is a fork from [ewerk/gradle-plugins/jaxb2](https://github.com/ewerk/gradle-plugins/).
-
-~~The thing we needed to be fixed has been fixed upstreams, so please migrate back to [ewerk/gradle-plugins/jaxb2](https://github.com/ewerk/gradle-plugins/).~~
-There are additional things to work on.
-
+This started as a fork from [ewerk/gradle-plugins/jaxb2](https://github.com/ewerk/gradle-plugins/).
 
 #### Description
 
@@ -18,8 +14,6 @@ the plugin can be used.
 At the moment the plugin is simplistic and just supports creating Java code from XSD. JAXB2
 specific special stuff like binding files or additional task parameters are currently not 
 supported but can surely make it into the plugin in future. 
-
-Please have a look at the plugins [change log](change_log.md).
 
 #### Dependency management
 The plugin creates a own 'jaxb2' configuration and adds it to the project. Then it adds all needed
