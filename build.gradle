@@ -29,7 +29,6 @@ apply plugin: 'org.gradle.maven'
 
 repositories {
   mavenCentral()
-  jcenter()
 }
 
 // START: For OSSRH
