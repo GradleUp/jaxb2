@@ -22,10 +22,10 @@ class PluginTest extends Specification {
         copyResources("project")
 
         when:
-        def result1 = build("generateJaxb2Classes")
+        def result1 = build("generateJaxb2ClassesExample")
 
         then:
-        result1.task(":generateJaxb2Classes").outcome == TaskOutcome.SUCCESS
+        result1.task(":generateJaxb2ClassesExample").outcome == TaskOutcome.SUCCESS
     }
 
     def 'compile project'() {
@@ -36,7 +36,7 @@ class PluginTest extends Specification {
         def result1 = build("assemble")
 
         then:
-        result1.task(":generateJaxb2Classes").outcome == TaskOutcome.SUCCESS
+        result1.task(":generateJaxb2ClassesExample").outcome == TaskOutcome.SUCCESS
     }
 
     protected final GradleRunner newRunner(final String... args) {
