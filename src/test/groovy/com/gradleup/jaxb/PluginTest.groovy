@@ -39,6 +39,18 @@ class PluginTest extends Specification {
         result1.task(":generateJaxb2ClassesExample").outcome == TaskOutcome.SUCCESS
     }
 
+    def 'build from cache'() {
+        given:
+        copyResources("project")
+
+        when:
+        build("assemble", "--build-cache")
+        def result1 = build("clean", "assemble", "--build-cache")
+
+        then:
+        result1.task(":generateJaxb2ClassesExample").outcome == TaskOutcome.FROM_CACHE
+    }
+
     protected final GradleRunner newRunner(final String... args) {
         List<String> additionalArgs = ["--warning-mode=fail"]
         return GradleRunner.create()
